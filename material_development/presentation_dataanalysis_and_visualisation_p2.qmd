@@ -34,13 +34,21 @@ editor: visual
 
 # Developing Machine Learning Models 
 
+## Note:
+
+As always, there are multiple packages which can be used to apply Machine Learning models. 
+
+Today we will focus on using `tidymodels`, which use a tidyverse approach.
+
+However, other packages such as `e1071` or `rpart` are available for specific uses
+
 ## When to apply machine learning
 
 Machine Learning problems can be seen as being part of three main groups: 
 
 - To predict
 - To classify 
-- To cluster, group or invesigate 
+- To cluster, group or investigate 
 
 These each link to a different type of Machine Learning Method. 
 
@@ -71,10 +79,159 @@ When considering machine learning, the methodology will typically depend on the 
 
 Of course, there is nuance in this, especially when you can convert continuous to categorical variables. 
 
+## Why Tidymodels 
 
+Tidymodels looks to apply the tidyverse style and readability to create a unified approach to building models. Taking advantage of the multitude of different packages each requiring different syntaxes and approaches. 
 
+This allows for easy scaling of models to include underwritters like Spark
 
+## Building Models 
 
+To build effective models, you should take your data, and split it into: 
+
+- **Training data** - This is where we develop our model [Typically 80% of the data]
+- **Testing data** - This is where we test the models accuracy [Typically 20% of the data]
+- **Validation data** (optional) - This is how we validate our findings
+
+As this helps to reduce the risk of over fitting and improves models accuracy. 
+
+## How to split data 
+
+When splitting data, we typically want a 80:20 Training:Test split. 
+
+This can be achieved with tidymodels through the `initial_split()` function 
+
+- `data_split <- initial_split(data, prop = 0.8)`
+- `data_training <- training(data_split)`
+- `data_test <- testing(data_split)`
+
+To split for validation you can use:
+
+- `data_split <- initial_split(data, prop = c(0.6, 0.2))`
+- `data_valid <- validation(data_split)`
+
+## Introducing Reproducibility 
+
+- Being able to reproduce the splits you create in your data is vital.
+- You can control the randomness found, using `set.seed()` function
+
+- We will cover more on embedding reproducibility next week. 
+
+## Building a tidy model
+
+Importantly, when using tidy models, we are required to *set an engine*, defining how the model should be developed for example: 
+
+```{r}
+#| echo: TRUE
+#| eval: false
+
+# Linear regression model 
+lm_model <- 
+  liner_reg() |> 
+  set_engine("lm") 
+
+# Classification Decision tree 
+c_dt_model <- 
+  decision_tree() |> 
+  set_engine("rpart") |> 
+  set_mode("classification")
+```
+
+In these cases you can also add the `translate()` function to convert the produced output into the same format as the traditional engine. 
+
+## Some Common & Accessible Machine Learning Methods 
+
+- Supervised Learning 
+  - Regression: 
+    - Linear Regressions / GLM - `linear_reg()` with engines: `"lm"`
+    - Decision Trees - `decision_tree()` with engines: `"rpart"` and mode `"regression"`
+    - Support Vector Regression - `svm_linear()` with engines: `"kernlab"` and mode `"regression"`
+    
+    
+## Some Common & Accessible Machine Learning Methods 
+- Supervised Learning
+  - Classification: 
+    - Logistic Regressions - `logistic_reg()` with engines: `"glm"`
+    - Decision Trees - `decision_tree()` with engines: `"rpart"` and mode `"classification"`
+    - Support Vector Machines - `svm_linear()` with engines: `"kernlab"` and mode `"classification"`
+
+## Fitting Models 
+
+Once your model has been created, you can utilise the `fit()` function 
+
+```{r}
+#| echo: TRUE
+#| eval: false
+
+# Linear regression model 
+lm_model <- 
+  liner_reg() |> 
+  set_engine("lm") 
+
+lm_model_fit <- 
+  lm_model |> 
+  fit(data = data, 
+      y ~ x)
+
+```
+
+You can then view the outcomes using: 
+
+```{r}
+#| echo: TRUE
+#| eval: false
+
+model_res <- 
+  lm_model_fit |>
+  extract_fit_engine() |>
+  summary()
+
+```
+
+## Making Predictions
+
+You can then use this model, to make predictions using: 
+
+```{r}
+#| echo: TRUE
+#| eval: false
+
+# Linear regression model 
+lm_model_fit <- 
+  lm_model |> 
+  fit(data = data, 
+      y ~ x)
+
+# Model Prediction 
+lm_model_prediction <- 
+  predict(lm_model_fit, 
+          new_data = data_new)
+
+# Bind the prediction with the "truth"
+model_res <- bind_cols(lm_model_prediction, 
+                       data_new |> select(x))
+
+```
+
+## Evaluating Models 
+
+This will create predictions based on the data provided, which can then be used to evaluate model effectiveness 
+
+```{r}
+#| echo: TRUE
+#| eval: false
+
+# Set Model Effectiveness Measures (for linear regression)
+
+model_metrics <- metric_set(rmse, rsq, mae)
+
+# Apply the evaluation methods 
+
+model_metrics(model_res, truth = x, estimate = .pred)
+
+```
+
+Please note, the model metrics, will vary depending on the method being used! 
 
 # Exercise 2: Applying Machine Learning Models 
 
@@ -85,7 +242,10 @@ Of course, there is nuance in this, especially when you can convert continuous t
 
 ## Resources: 
 
-
+- [Tidy Modeling with R](<https://www.tmwr.org/>)
+- [Tidy Modeling Cheatsheet](<https://www.tidymodels.org/find/parsnip/>)
+- [Learning Statistics with R - Danielle Navarro](https://learningstatisticswithr.com/lsr-0.6.pdf)
+- [Introduction to Statistical Learning - James, Witten, Hastie & Tibshirani](https://www.statlearning.com/)
 
 
 
