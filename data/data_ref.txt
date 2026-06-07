@@ -1,0 +1,5 @@
+To access the data, follow the link: 
+
+https://stats.gov.wales/en-GB/126fd3f5-a8f4-4a8b-bc14-67b6118f0677#data
+
+Download the table as a CSV file

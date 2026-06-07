@@ -1,0 +1,93 @@
+---
+title: "Data Analysis and Visualisation"
+subtitle: "Part 2"
+author: "Thomas Wise"
+format: 
+  revealjs:
+    smaller: true
+    theme: dark
+editor: visual
+---
+
+## Session Objectives 
+
+- Understand and apply advanced structural and design elements to ggplot2 visualisations 
+- Be able to create complex visualisations in line with Welsh Government design requirements 
+- Understand how to build simple machine learning models (particularly CART Models) 
+- Apply and develop simple machine learning models effectively. 
+
+## Today's Plan 
+
+- Section 1: Design elements of ggplot2 visualisations 
+- Exercise 1: Applying design elements to ggplot2 
+- Break 
+- Section 2: Developing Machine Learning Models 
+- Exercise 2: Applying Machine Learning Models 
+
+## 
+
+# Design elements of ggplot2 visualisations 
+
+# Exercise 1: Applying design elements to ggplot2
+
+# Break
+
+# Developing Machine Learning Models 
+
+## When to apply machine learning
+
+Machine Learning problems can be seen as being part of three main groups: 
+
+- To predict
+- To classify 
+- To cluster, group or invesigate 
+
+These each link to a different type of Machine Learning Method. 
+
+## Types of Machine Learning 
+
+Supervised Learning: Those which use *tagged* or *labelled* data to learn
+
+- Regression: 
+  - Problem aim: Prediction 
+  - Outcome Variable: Continuous 
+  
+- Classification: 
+  - Problem aim: Classify 
+  - Outcome variable: Categorical 
+  
+Unsupervised Learning: Those which use *untagged* or *unlabeled* data to learn 
+
+- Clustering:
+  - Problem aim: Grouping or Clustering 
+  - Outcome variable: No specific variable type
+  
+## Matching variables to the methodology
+
+When considering machine learning, the methodology will typically depend on the data available
+
+- Classification methods can only be used on Categorical outcome variables 
+- Prediction methods can only be used on Continuous outcome variables 
+
+Of course, there is nuance in this, especially when you can convert continuous to categorical variables. 
+
+
+
+
+
+
+# Exercise 2: Applying Machine Learning Models 
+
+## Next Session: 
+
+- Reproducibility 
+- 16th June, 12:30-14:00
+
+## Resources: 
+
+
+
+
+
+
+
