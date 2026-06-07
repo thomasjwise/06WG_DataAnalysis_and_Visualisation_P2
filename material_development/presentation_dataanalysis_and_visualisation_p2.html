@@ -422,14 +422,172 @@ Thomas Wise
 <li>Exercise 2: Applying Machine Learning Models</li>
 </ul>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
-</section>
+<section>
 <section id="design-elements-of-ggplot2-visualisations" class="title-slide slide level1 center">
 <h1>Design elements of ggplot2 visualisations</h1>
 
 </section>
+<section id="specifying-axiss-recap" class="slide level2">
+<h2>Specifying Axis’s (recap)</h2>
+<p>Simple shortcuts:</p>
+<ul>
+<li><code>lims(x = c(min, max), y = c(min, max))</code></li>
+</ul>
+<p>Advanced used:</p>
+<ul>
+<li><code>scale_x_continuous()</code> / <code>scale_y_continuous()</code></li>
+<li><code>scale_x_sqrt()</code> / <code>scale_y_sqrt()</code></li>
+<li><code>scale_x_log10()</code> / <code>scale_y_log10()</code></li>
+</ul>
+<p>With these having the internal arguments:</p>
+<ul>
+<li>breaks, minor_breaks, n.breaks</li>
+<li>labels, limits</li>
+</ul>
+</section>
+<section id="specifying-labels-recap" class="slide level2">
+<h2>Specifying Labels (recap)</h2>
+<p>You can simply specify axis labels using the <code>labs()</code> function with the internal arguments:</p>
+<ul>
+<li><code>title =</code> for the plot title</li>
+<li><code>subtitle =</code> for the plot subtitle</li>
+<li><code>caption =</code> for the plot caption</li>
+<li><code>x</code> / <code>y</code> for x or y axises respectively</li>
+</ul>
+<p>Advanced labels can be given through:</p>
+<ul>
+<li><code>annotate()</code> function combined with geom <code>text</code> or <code>rect</code></li>
+<li><code>geom_vline()</code> for a vertical line</li>
+<li><code>geom_hline()</code> for a horizontal line</li>
+</ul>
+</section>
+<section id="basic-colours-in-ggplot2" class="slide level2">
+<h2>Basic Colours in ggplot2</h2>
+<p>Adding colours to a visualization can be done either through</p>
+<ul>
+<li>Key Names: <em>“red”</em>, <em>“blue”</em></li>
+<li>Hexcodes/RGB Specification: <em>“#FF0000”</em>, <em>“#0000FF”</em></li>
+</ul>
+<p>And can be specified in several places in the ggplot code:</p>
+<ul>
+<li><code>colour =</code> - for points, or edge/line colours</li>
+<li><code>fill =</code> - for internal colours or fill colours</li>
+</ul>
+</section>
+<section id="specifying-palettes-using-rcolourbrewer" class="slide level2">
+<h2>Specifying Palettes using RColourBrewer</h2>
+<p>The CRAN package <code>RColourBrewer</code>, adds many ready-to-use discrete variable palettes such as:</p>
+<ul>
+<li>Colour blind friendly palettes</li>
+<li>Specific colour schemes</li>
+<li>Convergent or divergent schemes</li>
+</ul>
+<p>These can be specified in your plot using:</p>
+<ul>
+<li><code>+ scale_colour_brewer(palette = "XX")</code> - for colour cases</li>
+<li><code>+ scale_fill_brewer(palette = "XX")</code> - for fill cases</li>
+</ul>
+<p>To view all available palettes from RColourBrewer use:</p>
+<ul>
+<li><code>display.brewer.all()</code>, specifying <code>colorblindFriendly = TRUE</code> accordingly</li>
+</ul>
+</section>
+<section id="types-of-rcolourbrewer-palette" class="slide level2">
+<h2>Types of RColourBrewer Palette</h2>
+<p>RColourBrewer specifies three types of palette:</p>
+<ul>
+<li>Sequential palettes: suited to ordered data which progress from low to high (gradient) these include: <em>Blues, BuGn, BuPu, GnBu, Greens, Greys, Oranges, OrRd, PuBu, PuBuGn, PuRd, Purples, RdPu, Reds, YlGn, YlGnBu YlOrBr, YlOrRd</em></li>
+<li>Qualitative palettes: suited to represent nominal or categorical data, without indicating magnitude differences between groups: <em>Accent, Dark2, Paired, Pastel1, Pastel2, Set1, Set2, Set3</em></li>
+<li>Diverging palettes: suited for putting an emphasis on mid-range critical values, and extremes at both ends of the data range: : <em>BrBG, PiYG, PRGn, PuOr, RdBu, RdGy, RdYlBu, RdYlGn, Spectral</em></li>
+</ul>
+</section>
+<section id="continuous-variables-and-colour-palettes" class="slide level2">
+<h2>Continuous Variables and Colour Palettes</h2>
+<p>If you are using continuous variables, such as height, weight or size, use:</p>
+<ul>
+<li><code>scale_colour_gradient()</code> - specifying the <code>low</code> and <code>high</code> colours accordingly</li>
+<li><code>scale_fill_gradient()</code> - specifying the <code>low</code> and <code>high</code> colours accordingly</li>
+</ul>
+</section>
+<section id="linking-colours-to-variables" class="slide level2">
+<h2>Linking Colours to Variables</h2>
+<p>To link colours to variables simply, you can use the function:</p>
+<ul>
+<li><code>scale_color_manual(values = c(VAR = COL))</code></li>
+</ul>
+<p>This manual specification of colour should then be paired with specifying the colour variable inside the <code>mapping = aes(colour = VAR)</code>.</p>
+<p>This can be extended through assigning this to a variable!</p>
+</section>
+<section id="applying-colour-accessibility-guidelines" class="slide level2">
+<h2>Applying colour accessibility guidelines</h2>
+<p>Colour accessibility guidelines are provided by the <a href="https://analysisfunction.civilservice.gov.uk/policy-store/data-visualisation-colours-in-charts/">Government Analysis Function</a>. And highlights the following:</p>
+<ul>
+<li>Use colour consistently</li>
+<li>Consider colour associations</li>
+<li>Keep backgrounds and layouts plain</li>
+<li>Consider low vision and colour blindness</li>
+<li>Consider what the plot would look like in grey scale</li>
+</ul>
+</section>
+<section id="applying-colour-accessibility-guidelines-1" class="slide level2">
+<h2>Applying colour accessibility guidelines</h2>
+<p>The GSS Colour Palette:</p>
+<ul>
+<li>Dark Blue, #12436D, (18, 67, 109)RGB, (83, 39, 0, 57)CYMK</li>
+<li>Turquoise, #28A197, (40, 161, 151)RGB, (75, 0, 6, 37)CYMK</li>
+<li>Dark Pink, #801650, (128, 22, 80)RGB, (0, 83, 38, 50)CYMK</li>
+<li>Orange, #F46A25, (244, 106, 37)RGB, (0, 57, 85, 4)CYMK</li>
+</ul>
+<p>All these colours have a contrast ratio of a least 3 to 1 against white</p>
+<p>Additional Colours: Dark Grey #12436D, Light Purple #A285D1</p>
+</section>
+<section id="using-preset-themes" class="slide level2">
+<h2>Using preset themes</h2>
+<ul>
+<li><p><code>theme_bw()</code></p></li>
+<li><p><code>theme_classic()</code></p></li>
+<li><p><code>theme_dark()</code></p></li>
+<li><p><code>theme_light()</code></p></li>
+<li><p><code>theme_minimal()</code></p></li>
+<li><p><code>theme_void()</code></p></li>
+<li><p>WELSH GOV THEME</p></li>
+</ul>
+</section>
+<section id="using-specifying-manual-themes" class="slide level2">
+<h2>Using specifying manual themes</h2>
+<p>By using the <code>theme()</code> function as a foundation, you can specify almost every element of a visualisation plot.</p>
+<p>But remember to call these functions when using specific elements</p>
+<ul>
+<li>Line elements: <code>element_line()</code></li>
+<li>Rectangular/area elements: <code>element_rect()</code></li>
+<li>Text elements: <code>element_text()</code></li>
+</ul>
+</section>
+<section id="specifying-layouts-using-faceting" class="slide level2">
+<h2>Specifying Layouts using faceting</h2>
+<p>The <code>facet_grid()</code> and <code>facet_wrap()</code> functions can be used to segment the visualisation by a variable.</p>
+<p>This requires the specification of variable using <code>vars()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a><span class="co"># Example comparing diamond price to carat in ggplot</span></span>
+<span id="cb1-4"><a href=""></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds) <span class="sc">+</span> </span>
+<span id="cb1-5"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> price, <span class="at">x =</span> carat, <span class="at">colour =</span> color)) <span class="sc">+</span> </span>
+<span id="cb1-6"><a href=""></a>  <span class="fu">facet_grid</span>(<span class="at">cols =</span> <span class="fu">vars</span>(color))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
+</div>
+<img data-src="presentation_dataanalysis_and_visualisation_p2_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+<section id="specifying-layouts-using-ggarrange" class="slide level2">
+<h2>Specifying Layouts using ggarrange</h2>
+<p>The <code>ggarrange()</code> function can be used to combine ggplot visualisations into a single plot.</p>
+<p>This requires the variables:</p>
+<ul>
+<li>ncol /nrow - numeric values</li>
+<li>…, stored ggplot graphics</li>
+<li>common.legend = TRUE/FALSE</li>
+</ul>
+<p>This can help compress visualisations into a single plot and make them more interpretable.</p>
+</section></section>
 <section id="exercise-1-applying-design-elements-to-ggplot2" class="title-slide slide level1 center">
 <h1>Exercise 1: Applying design elements to ggplot2</h1>
 
@@ -524,20 +682,28 @@ Thomas Wise
 <li><code>data_valid &lt;- validation(data_split)</code></li>
 </ul>
 </section>
+<section id="introducing-reproducibility" class="slide level2">
+<h2>Introducing Reproducibility</h2>
+<ul>
+<li><p>Being able to reproduce the splits you create in your data is vital.</p></li>
+<li><p>You can control the randomness found, using <code>set.seed()</code> function</p></li>
+<li><p>We will cover more on embedding reproducibility next week.</p></li>
+</ul>
+</section>
 <section id="building-a-tidy-model" class="slide level2">
 <h2>Building a tidy model</h2>
 <p>Importantly, when using tidy models, we are required to <em>set an engine</em>, defining how the model should be developed for example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="co"># Linear regression model </span></span>
-<span id="cb1-2"><a href=""></a>lm_model <span class="ot">&lt;-</span> </span>
-<span id="cb1-3"><a href=""></a>  <span class="fu">liner_reg</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb1-4"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) </span>
-<span id="cb1-5"><a href=""></a></span>
-<span id="cb1-6"><a href=""></a><span class="co"># Classification Decision tree </span></span>
-<span id="cb1-7"><a href=""></a>c_dt_model <span class="ot">&lt;-</span> </span>
-<span id="cb1-8"><a href=""></a>  <span class="fu">decision_tree</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb1-9"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"rpart"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb1-10"><a href=""></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># Linear regression model </span></span>
+<span id="cb2-2"><a href=""></a>lm_model <span class="ot">&lt;-</span> </span>
+<span id="cb2-3"><a href=""></a>  <span class="fu">liner_reg</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb2-4"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) </span>
+<span id="cb2-5"><a href=""></a></span>
+<span id="cb2-6"><a href=""></a><span class="co"># Classification Decision tree </span></span>
+<span id="cb2-7"><a href=""></a>c_dt_model <span class="ot">&lt;-</span> </span>
+<span id="cb2-8"><a href=""></a>  <span class="fu">decision_tree</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb2-9"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"rpart"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-10"><a href=""></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In these cases you can also add the <code>translate()</code> function to convert the produced output into the same format as the traditional engine.</p>
 </section>
@@ -573,55 +739,55 @@ Thomas Wise
 <h2>Fitting Models</h2>
 <p>Once your model has been created, you can utilise the <code>fit()</code> function</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># Linear regression model </span></span>
-<span id="cb2-2"><a href=""></a>lm_model <span class="ot">&lt;-</span> </span>
-<span id="cb2-3"><a href=""></a>  <span class="fu">liner_reg</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb2-4"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) </span>
-<span id="cb2-5"><a href=""></a></span>
-<span id="cb2-6"><a href=""></a>lm_model_fit <span class="ot">&lt;-</span> </span>
-<span id="cb2-7"><a href=""></a>  lm_model <span class="sc">|&gt;</span> </span>
-<span id="cb2-8"><a href=""></a>  <span class="fu">fit</span>(<span class="at">data =</span> data, </span>
-<span id="cb2-9"><a href=""></a>      y <span class="sc">~</span> x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># Linear regression model </span></span>
+<span id="cb3-2"><a href=""></a>lm_model <span class="ot">&lt;-</span> </span>
+<span id="cb3-3"><a href=""></a>  <span class="fu">liner_reg</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a href=""></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>) </span>
+<span id="cb3-5"><a href=""></a></span>
+<span id="cb3-6"><a href=""></a>lm_model_fit <span class="ot">&lt;-</span> </span>
+<span id="cb3-7"><a href=""></a>  lm_model <span class="sc">|&gt;</span> </span>
+<span id="cb3-8"><a href=""></a>  <span class="fu">fit</span>(<span class="at">data =</span> data, </span>
+<span id="cb3-9"><a href=""></a>      y <span class="sc">~</span> x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can then view the outcomes using:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>model_res <span class="ot">&lt;-</span> </span>
-<span id="cb3-2"><a href=""></a>  lm_model_fit <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href=""></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">|&gt;</span></span>
-<span id="cb3-4"><a href=""></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>model_res <span class="ot">&lt;-</span> </span>
+<span id="cb4-2"><a href=""></a>  lm_model_fit <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href=""></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href=""></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="making-predictions" class="slide level2">
 <h2>Making Predictions</h2>
 <p>You can then use this model, to make predictions using:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="co"># Linear regression model </span></span>
-<span id="cb4-2"><a href=""></a>lm_model_fit <span class="ot">&lt;-</span> </span>
-<span id="cb4-3"><a href=""></a>  lm_model <span class="sc">|&gt;</span> </span>
-<span id="cb4-4"><a href=""></a>  <span class="fu">fit</span>(<span class="at">data =</span> data, </span>
-<span id="cb4-5"><a href=""></a>      y <span class="sc">~</span> x)</span>
-<span id="cb4-6"><a href=""></a></span>
-<span id="cb4-7"><a href=""></a><span class="co"># Model Prediction </span></span>
-<span id="cb4-8"><a href=""></a>lm_model_prediction <span class="ot">&lt;-</span> </span>
-<span id="cb4-9"><a href=""></a>  <span class="fu">predict</span>(lm_model_fit, </span>
-<span id="cb4-10"><a href=""></a>          <span class="at">new_data =</span> data_new)</span>
-<span id="cb4-11"><a href=""></a></span>
-<span id="cb4-12"><a href=""></a><span class="co"># Bind the prediction with the "truth"</span></span>
-<span id="cb4-13"><a href=""></a>model_res <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(lm_model_prediction, </span>
-<span id="cb4-14"><a href=""></a>                       data_new <span class="sc">|&gt;</span> <span class="fu">select</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># Linear regression model </span></span>
+<span id="cb5-2"><a href=""></a>lm_model_fit <span class="ot">&lt;-</span> </span>
+<span id="cb5-3"><a href=""></a>  lm_model <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a href=""></a>  <span class="fu">fit</span>(<span class="at">data =</span> data, </span>
+<span id="cb5-5"><a href=""></a>      y <span class="sc">~</span> x)</span>
+<span id="cb5-6"><a href=""></a></span>
+<span id="cb5-7"><a href=""></a><span class="co"># Model Prediction </span></span>
+<span id="cb5-8"><a href=""></a>lm_model_prediction <span class="ot">&lt;-</span> </span>
+<span id="cb5-9"><a href=""></a>  <span class="fu">predict</span>(lm_model_fit, </span>
+<span id="cb5-10"><a href=""></a>          <span class="at">new_data =</span> data_new)</span>
+<span id="cb5-11"><a href=""></a></span>
+<span id="cb5-12"><a href=""></a><span class="co"># Bind the prediction with the "truth"</span></span>
+<span id="cb5-13"><a href=""></a>model_res <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(lm_model_prediction, </span>
+<span id="cb5-14"><a href=""></a>                       data_new <span class="sc">|&gt;</span> <span class="fu">select</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="evaluating-models" class="slide level2">
 <h2>Evaluating Models</h2>
 <p>This will create predictions based on the data provided, which can then be used to evaluate model effectiveness</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># Set Model Effectiveness Measures (for linear regression)</span></span>
-<span id="cb5-2"><a href=""></a></span>
-<span id="cb5-3"><a href=""></a>model_metrics <span class="ot">&lt;-</span> <span class="fu">metric_set</span>(rmse, rsq, mae)</span>
-<span id="cb5-4"><a href=""></a></span>
-<span id="cb5-5"><a href=""></a><span class="co"># Apply the evaluation methods </span></span>
-<span id="cb5-6"><a href=""></a></span>
-<span id="cb5-7"><a href=""></a><span class="fu">model_metrics</span>(model_res, <span class="at">truth =</span> x, <span class="at">estimate =</span> .pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="co"># Set Model Effectiveness Measures (for linear regression)</span></span>
+<span id="cb6-2"><a href=""></a></span>
+<span id="cb6-3"><a href=""></a>model_metrics <span class="ot">&lt;-</span> <span class="fu">metric_set</span>(rmse, rsq, mae)</span>
+<span id="cb6-4"><a href=""></a></span>
+<span id="cb6-5"><a href=""></a><span class="co"># Apply the evaluation methods </span></span>
+<span id="cb6-6"><a href=""></a></span>
+<span id="cb6-7"><a href=""></a><span class="fu">model_metrics</span>(model_res, <span class="at">truth =</span> x, <span class="at">estimate =</span> .pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Please note, the model metrics, will vary depending on the method being used!</p>
 </section></section>

@@ -24,9 +24,167 @@ editor: visual
 - Section 2: Developing Machine Learning Models 
 - Exercise 2: Applying Machine Learning Models 
 
-## 
-
 # Design elements of ggplot2 visualisations 
+
+## Specifying Axis's (recap)
+
+Simple shortcuts:
+
+-   `lims(x = c(min, max), y = c(min, max))`
+
+Advanced used:
+
+-   `scale_x_continuous()` / `scale_y_continuous()`
+-   `scale_x_sqrt()` / `scale_y_sqrt()`
+-   `scale_x_log10()` / `scale_y_log10()`
+
+With these having the internal arguments:
+
+-   breaks, minor_breaks, n.breaks
+-   labels, limits
+
+## Specifying Labels (recap)
+
+You can simply specify axis labels using the `labs()` function with the internal arguments:
+
+-   `title =` for the plot title
+-   `subtitle =` for the plot subtitle
+-   `caption =` for the plot caption
+-   `x` / `y` for x or y axises respectively
+
+Advanced labels can be given through:
+
+-   `annotate()` function combined with geom `text` or `rect`
+-   `geom_vline()` for a vertical line
+-   `geom_hline()` for a horizontal line
+
+## Basic Colours in ggplot2
+
+Adding colours to a visualization can be done either through
+
+-   Key Names: *"red"*, *"blue"*
+-   Hexcodes/RGB Specification: *"#FF0000"*, *"#0000FF"*
+
+And can be specified in several places in the ggplot code:
+
+-   `colour =` - for points, or edge/line colours
+-   `fill =` - for internal colours or fill colours
+
+## Specifying Palettes using RColourBrewer
+
+The CRAN package `RColourBrewer`, adds many ready-to-use discrete variable palettes such as:
+
+-   Colour blind friendly palettes
+-   Specific colour schemes
+-   Convergent or divergent schemes
+
+These can be specified in your plot using:
+
+-   `+ scale_colour_brewer(palette = "XX")` - for colour cases
+-   `+ scale_fill_brewer(palette = "XX")` - for fill cases
+
+To view all available palettes from RColourBrewer use:
+
+-   `display.brewer.all()`, specifying `colorblindFriendly = TRUE` accordingly
+
+## Types of RColourBrewer Palette
+
+RColourBrewer specifies three types of palette:
+
+-   Sequential palettes: suited to ordered data which progress from low to high (gradient) these include: *Blues, BuGn, BuPu, GnBu, Greens, Greys, Oranges, OrRd, PuBu, PuBuGn, PuRd, Purples, RdPu, Reds, YlGn, YlGnBu YlOrBr, YlOrRd*
+-   Qualitative palettes: suited to represent nominal or categorical data, without indicating magnitude differences between groups: *Accent, Dark2, Paired, Pastel1, Pastel2, Set1, Set2, Set3*
+-   Diverging palettes: suited for putting an emphasis on mid-range critical values, and extremes at both ends of the data range: : *BrBG, PiYG, PRGn, PuOr, RdBu, RdGy, RdYlBu, RdYlGn, Spectral*
+
+## Continuous Variables and Colour Palettes
+
+If you are using continuous variables, such as height, weight or size, use:
+
+-   `scale_colour_gradient()` - specifying the `low` and `high` colours accordingly
+-   `scale_fill_gradient()` - specifying the `low` and `high` colours accordingly
+
+## Linking Colours to Variables
+
+To link colours to variables simply, you can use the function:
+
+-   `scale_color_manual(values = c(VAR = COL))`
+
+This manual specification of colour should then be paired with specifying the colour variable inside the `mapping = aes(colour = VAR)`.
+
+This can be extended through assigning this to a variable!
+
+## Applying colour accessibility guidelines
+
+Colour accessibility guidelines are provided by the [Government Analysis Function](https://analysisfunction.civilservice.gov.uk/policy-store/data-visualisation-colours-in-charts/). And highlights the following:
+
+-   Use colour consistently
+-   Consider colour associations
+-   Keep backgrounds and layouts plain
+-   Consider low vision and colour blindness
+-   Consider what the plot would look like in grey scale
+
+## Applying colour accessibility guidelines
+
+The GSS Colour Palette:
+
+-   Dark Blue, #12436D, (18, 67, 109)RGB, (83, 39, 0, 57)CYMK
+-   Turquoise, #28A197, (40, 161, 151)RGB, (75, 0, 6, 37)CYMK
+-   Dark Pink, #801650, (128, 22, 80)RGB, (0, 83, 38, 50)CYMK
+-   Orange, #F46A25, (244, 106, 37)RGB, (0, 57, 85, 4)CYMK
+
+All these colours have a contrast ratio of a least 3 to 1 against white
+
+Additional Colours: Dark Grey #12436D, Light Purple #A285D1
+
+## Using preset themes
+
+-   `theme_bw()`
+-   `theme_classic()`
+-   `theme_dark()`
+-   `theme_light()`
+-   `theme_minimal()`
+-   `theme_void()`
+
+- WELSH GOV THEME
+
+## Using specifying manual themes
+
+By using the `theme()` function as a foundation, you can specify almost every element of a visualisation plot.
+
+But remember to call these functions when using specific elements
+
+-   Line elements: `element_line()`
+-   Rectangular/area elements: `element_rect()`
+-   Text elements: `element_text()`
+
+## Specifying Layouts using faceting
+
+The `facet_grid()` and `facet_wrap()` functions can be used to segment the visualisation by a variable.
+
+This requires the specification of variable using `vars()`.
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+
+library(ggplot2)
+
+# Example comparing diamond price to carat in ggplot
+ggplot(data = diamonds) + 
+  geom_point(mapping = aes(y = price, x = carat, colour = color)) + 
+  facet_grid(cols = vars(color))
+```
+
+## Specifying Layouts using ggarrange
+
+The `ggarrange()` function can be used to combine ggplot visualisations into a single plot.
+
+This requires the variables:
+
+-   ncol /nrow - numeric values
+-   ..., stored ggplot graphics
+-   common.legend = TRUE/FALSE
+
+This can help compress visualisations into a single plot and make them more interpretable.
 
 # Exercise 1: Applying design elements to ggplot2
 
