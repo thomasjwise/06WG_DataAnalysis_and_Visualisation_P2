@@ -75,18 +75,11 @@ summary(data_cut_region)
   ## Demonstrating the distribution of points by using colouring points depending on the age group 
 
 ggplot(data = data_cut_region) + 
-  geom_jitter(mapping = aes(x = Academic.year, 
-                            y = Number.of.activities,
-                            colour = Age.group))
+  geom_jitter(??)
 
 ## This of course is not the only way to add complexity, as you can define shape also to show more information
 ## Exercise 1b: Expand on the jitter plot from 1a, this time adding a shape variable linked to the Mode of Programme 
 
-ggplot(data = data_cut_region) + 
-  geom_jitter(mapping = aes(x = Academic.year, 
-                            y = Number.of.activities,
-                            colour = Age.group,
-                            shape = Mode.of.programme))
 
 
 # Exercise 2: Applying Advanced Design Elements 
@@ -95,33 +88,25 @@ ggplot(data = data_cut_region) +
 ## Exercise 2a: Building on the plot created in 1a, use `theme(axis.text.x = element_text())` to rotate the axis labels by 90 degrees
 ## Note - you can add vjust = 0.5 and hjust = 1 to make things more readable! 
 
-ggplot(data = data_cut_region) + 
-  geom_jitter(mapping = aes(x = Academic.year, 
-                            y = Number.of.activities,
-                            colour = Age.group)) + 
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
 
 ## At times however, you may want to spit up your graphics to understand the topic more. 
 ## Exercise 2b: Using facet_grid, where you specific cols as the variable Mode of Programme, 
   ## Further improve th readability of the visualisation from 2a 
 
 ggplot(data = data_cut_region) + 
-  geom_jitter(mapping = aes(x = Academic.year, 
-                            y = Number.of.activities,
-                            colour = Age.group)) + 
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) + 
-  facet_grid(cols = vars(Mode.of.programme))
+  geom_jitter(??) + 
+  theme(??) + 
+  facet_grid(??)
 
 ## This visualisation however still presents incredibly dense information, 
 ## Exercise 2c: Recreate the visualisation in 2b, using only data from the year 2019-2020
 
 ggplot(data = 
          data_cut_region |> subset(Academic.year == "2019-20")) + 
-  geom_jitter(mapping = aes(x = Academic.year, 
-                            y = Number.of.activities,
-                            colour = Age.group)) + 
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) + 
-  facet_grid(cols = vars(Mode.of.programme))
+  geom_jitter(??) + 
+  theme(??) + 
+  facet_grid(??)
   
 
 # Exercise 3: Utilising the Welsh Government Visualisation Package 
@@ -129,11 +114,6 @@ ggplot(data =
 ## You can use the Welsh Government Visualisation style as a theme! Using `kas_style()`
 ## Exercise 3a: Reproduce one of the visualisations we have already created today, but include the `kas_style()` layer
 
-ggplot(data = data_cut_region) + 
-  geom_jitter(mapping = aes(x = Academic.year, 
-                            y = Number.of.activities,
-                            colour = Age.group)) + 
-  kas_style()
 
 # Section 2: Applying Machine Learning Models 
 
@@ -146,12 +126,12 @@ set.seed(08062026)
 ## Exercise 4b: Using the function `initial_split()` split the data_cut_region dataset 
   ## Into training and test data, with a 80:20 ratio. 
 
-data_cut_region_split <- initial_split(data_cut_region, prop = 0.8)
+data_cut_region_split <- initial_split(??)
 
 ## Exercise 4c: Divide this Large Initial Split object into a training and testing data frames 
 
-data_cut_region_train <- training(data_cut_region_split) 
-data_cut_region_test <- testing(data_cut_region_split)
+data_cut_region_train <- training(??) 
+data_cut_region_test <- testing(??)
 
 ### This should result in a training set where n = 136708, and testing set where n = 34178
 
@@ -162,16 +142,16 @@ data_cut_region_test <- testing(data_cut_region_split)
 
 dt_model <- 
   decision_tree() |>
-  set_engine("rpart") |>
-  set_mode("regression")
+  set_engine(??) |>
+  set_mode(??)
 
 ## Exercise 5b: Next create a model fit, to: 
   ## Predict the number of activities based on the the age group, activity level and mode of programme
 
 dt_model_fit_1 <- 
   dt_model |> 
-  fit(data = data_cut_region_train,
-      Number.of.activities ~ Age.group + Activity.level + Mode.of.programme)
+  fit(data = ??,
+      ?? ~ ?? + ?? + ??)
 
 ## Exercise 5c: Check the outcomes of the model 
 
@@ -182,41 +162,35 @@ dt_model_res_1 <-
 
 ## Exercise 5d: Visualise these model outcomes
   ## Please note, this graphic is incredibly challenging to read, and hard to interpret. 
-rpart.plot(dt_model_res_1)
+rpart.plot(??)
 
 # Exercise 6: Predicting with and Evaluating Tidy models 
 
 ## Exercise 6a: Using the testing data, test the prediction of the model 
 dt_model_pred_1 <- 
-  predict(dt_model_fit_1,
-          new_data = data_cut_region_test)
+  predict(??,
+          new_data = ??)
 
 ## Exercise 6b: Join (using rbind), the true variables with the predicted 
 dt_model_pred_res <- 
   bind_cols(dt_model_pred_1, 
-            data_cut_region_test |> select(Number.of.activities))
+            ??)
 
 ## Exercise 6c: Using your knowledge of ggplot2, plot the predicted value (.pred) against the truth (Number.of.activities)
   # In this case, plot the "truth" on the x-axis, and the predicted on the y-axis 
-
-ggplot(data = dt_model_pred_res) + 
-  geom_point(mapping = aes(x = Number.of.activities, y = .pred))
 
 
 ## Exercise 6d: Add an additional diagonal line (x = y), using `geom_abline()` 
   # to understand the line of best fit
   # Hint, leave geom_abline() blank to get a x = y line. 
   
-ggplot(data = dt_model_pred_res) + 
-  geom_point(mapping = aes(x = Number.of.activities, y = .pred)) + 
-  geom_abline()
 
 ## Exercise 6e: Evaluate the created model with the evaluation metrics of RMSE, MAE and R-squared
-model_metrics <- metric_set(rmse, mae, rsq)
+model_metrics <- metric_set(??)
 
-dt_model_metric <- model_metrics(dt_model_pred_res, 
-                                  truth = Number.of.activities, 
-                                  estimate = .pred)
+dt_model_metric <- model_metrics(??, 
+                                  truth = ??, 
+                                  estimate = ??)
 
 print(dt_model_metric)
 

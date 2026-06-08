@@ -156,6 +156,11 @@ But remember to call these functions when using specific elements
 -   Rectangular/area elements: `element_rect()`
 -   Text elements: `element_text()`
 
+You can use these to rotate axis labels too! 
+For example: 
+
+- `theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))`
+
 ## Specifying Layouts using faceting
 
 The `facet_grid()` and `facet_wrap()` functions can be used to segment the visualisation by a variable.

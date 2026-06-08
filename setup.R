@@ -11,7 +11,10 @@ pkg_list <- c("tidyverse",
               "yardstick",
               "tidymodels",
               "rpart",
-              "rpart.plot")
+              "rpart.plot",
+              "usethis",
+              "devtools",
+              "openxlsx")
 
 missing_packages <- pkg_list[!pkg_list %in% rownames(installed.packages())]
 
