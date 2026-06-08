@@ -3,7 +3,15 @@
 pkg_list <- c("tidyverse", 
               "Rcpp", 
               "stats",
-              "tidymodels")
+              "broom",
+              "dials",
+              "infer",
+              "modeldata",
+              "parsnip",
+              "yardstick",
+              "tidymodels",
+              "rpart",
+              "rpart.plot")
 
 missing_packages <- pkg_list[!pkg_list %in% rownames(installed.packages())]
 

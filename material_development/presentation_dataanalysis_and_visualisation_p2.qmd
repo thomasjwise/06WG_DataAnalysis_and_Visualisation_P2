@@ -24,11 +24,13 @@ editor: visual
 - Section 2: Developing Machine Learning Models 
 - Exercise 2: Applying Machine Learning Models 
 
+# But first - Setup! 
+
 # Design elements of ggplot2 visualisations 
 
 ## Specifying Axis's (recap)
 
-Simple shortcuts:
+Simple short cuts:
 
 -   `lims(x = c(min, max), y = c(min, max))`
 
@@ -144,8 +146,6 @@ Additional Colours: Dark Grey #12436D, Light Purple #A285D1
 -   `theme_minimal()`
 -   `theme_void()`
 
-- WELSH GOV THEME
-
 ## Using specifying manual themes
 
 By using the `theme()` function as a foundation, you can specify almost every element of a visualisation plot.
@@ -185,6 +185,8 @@ This requires the variables:
 -   common.legend = TRUE/FALSE
 
 This can help compress visualisations into a single plot and make them more interpretable.
+
+# Welsh Government Data Visualisation Theme
 
 # Exercise 1: Applying design elements to ggplot2
 
